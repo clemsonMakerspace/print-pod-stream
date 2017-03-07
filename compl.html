@@ -1,6 +1,107 @@
 <html>
 	<!-- Taken from http://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock -->
 	<head>
+		<style>
+			h06 {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+			}
+
+			h06 span {
+				color: white;
+				font: bold 24 px/45px Helvetica, Sans-Serif;
+				letter-spacing: -1px;
+				background: rgb(0,0,0); /* fallback color */
+				background rgba(0,0,0,0.7);
+				padding: 10px;
+			}
+
+			h07 {
+				position: absolute;
+				top: 0px;
+				left: 640px;
+				width: 100%;
+			}
+
+
+			h07 span {
+				color: white;
+				font: bold 24 px/45px Helvetica, Sans-Serif;
+				letter-spacing: -1px;
+				background: rgb(0,0,0); /* fallback color */
+				background rgba(0,0,0,0.7);
+				padding: 10px;
+			}
+
+			h08 {
+				position: absolute;
+				top: 0px;
+				left: 1280px;
+				width: 100%;
+			}
+
+
+			h08 span {
+				color: white;
+				font: bold 24 px/45px Helvetica, Sans-Serif;
+				letter-spacing: -1px;
+				background: rgb(0,0,0); /* fallback color */
+				background rgba(0,0,0,0.7);
+				padding: 10px;
+			}
+
+			h09 {
+				position: absolute;
+				bottom: 0px;
+				left: 0;
+				width: 100%;
+			}
+
+			h09 span {
+				color: white;
+				font: bold 24 px/45px Helvetica, Sans-Serif;
+				letter-spacing: -1px;
+				background: rgb(0,0,0); /* fallback color */
+				background rgba(0,0,0,0.7);
+				padding: 10px;
+			}
+
+			h10 {
+				position: absolute;
+				bottom: 0px;
+				left: 640px;
+				width: 100%;
+			}
+
+			h10 span {
+				color: white;
+				font: bold 24 px/45px Helvetica, Sans-Serif;
+				letter-spacing: -1px;
+				background: rgb(0,0,0); /* fallback color */
+				background rgba(0,0,0,0.7);
+				padding: 10px;
+			}
+
+			h56 {
+				position: absolute;
+				bottom: 0px;
+				left: 1280px;
+				width: 100%;
+			}
+
+
+			h56 span {
+				color: white;
+				font: bold 24 px/45px Helvetica, Sans-Serif;
+				letter-spacing: -1px;
+				background: rgb(0,0,0); /* fallback color */
+				background rgba(0,0,0,0.7);
+				padding: 10px;
+			}
+		</style>
+
 		<script>
 		function getProgress(i, callback) {
 			var xhr = new XMLHttpRequest();
@@ -22,8 +123,52 @@
 		function startCheck() {
 			getProgress(10306, function() {
 				var prog = this.progress.completion;
-				document.getElementById('txt').innerHTML = prog.toFixed(2) + "%";
+				if(prog == null) {
+					prog = 0;
+				}
+				document.getElementById('06').innerHTML = "<h06><span>10306: " + prog.toFixed(2) + "%</span></h06>";
 			});
+
+			getProgress(10307, function() {
+				var prog = this.progress.completion;
+				if(prog == null) {
+					prog = 0;
+				}
+				document.getElementById('07').innerHTML = "<h07><span>" + "10307: " + prog.toFixed(2) + "%" + "</span></h07>";
+			});
+
+			getProgress(10308, function() {
+				var prog = this.progress.completion;
+				if(prog == null) {
+					prog = 0;
+				}
+				document.getElementById('08').innerHTML = "<h08><span>" + "10308: " + prog.toFixed(2) + "%" + "</span><h08>";
+			});
+
+			getProgress(10309, function() {
+				var prog = this.progress.completion;
+				if(prog == null) {
+					prog = 0;
+				}
+				document.getElementById('09').innerHTML = "<h09><span>" + "10309: " + prog.toFixed(2) + "%" + "</span></h09>";
+			});
+
+			getProgress(10310, function() {
+				var prog = this.progress.completion;
+				if(prog == null) {
+					prog = 0;
+				}
+				document.getElementById('10').innerHTML = "<h10><span>" + "10310: " +  prog.toFixed(2) + "%" + "</span></h10>";
+			});
+
+			getProgress(10156, function() {
+				var prog = this.progress.completion;
+				if(prog == null) {
+					prog = 0;
+				}
+				document.getElementById('56').innerHTML = "<h56><span>" + "10156: " + prog.toFixed(2) + "%" + "</span></h56>";
+			});
+
 			var t = setTimeout(startCheck, 1000);
 		}
 		</script>
@@ -31,6 +176,11 @@
 	<!-- Taken from http://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock -->
 
 	<body onload="startCheck()">
-	<div id = "txt" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
-	</body>
+		<div id = "06" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"><h06>test</h06></div>
+		<div id = "07" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
+		<div id = "08" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
+		<div id = "09" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
+		<div id = "10" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
+		<div id = "56" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
+	</body
 </html>
