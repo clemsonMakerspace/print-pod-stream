@@ -1,0 +1,36 @@
+<html>
+	<!-- Taken from http://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock -->
+	<head>
+		<script>
+		function getProgress(i, callback) {
+			var xhr = new XMLHttpRequest();
+			var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
+
+			xhr.responseType = "json";
+
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState === 4) {
+					callback.apply(xhr.response);
+				}
+			}
+
+			xhr.open("GET", "http://series1-" + i + ".local:5000/api/job");
+			xhr.setRequestHeader("X-Api-Key", apiKey);
+			xhr.send();
+		}
+		
+		function startCheck() {
+			getProgress(10306, function() {
+				var prog = this.progress.completion;
+				document.getElementById('txt').innerHTML = prog.toFixed(2) + "%";
+			});
+			var t = setTimeout(startCheck, 1000);
+		}
+		</script>
+	</head>
+	<!-- Taken from http://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock -->
+
+	<body onload="startCheck()">
+	<div id = "txt" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
+	</body>
+</html>
