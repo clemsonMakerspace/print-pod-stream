@@ -1,186 +1,207 @@
 <html>
-	<!-- Taken from http://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock -->
 	<head>
 		<style>
-			h06 {
+			h10306 {
 				position: absolute;
-				top: 0px;
+				top: 433px;
 				left: 0px;
 				width: 100%;
 			}
 
-			h06 span {
+			h10306 span {
 				color: white;
-				font: bold 24 px/45px Helvetica, Sans-Serif;
-				letter-spacing: -1px;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
 				background: rgb(0,0,0); /* fallback color */
-				background rgba(0,0,0,0.7);
+				background: rgba(0,0,0,0.5);
 				padding: 10px;
 			}
 
-			h07 {
+			h10307 {
 				position: absolute;
-				top: 0px;
+				top: 433px;
 				left: 640px;
 				width: 100%;
 			}
 
 
-			h07 span {
+			h10307 span {
 				color: white;
-				font: bold 24 px/45px Helvetica, Sans-Serif;
-				letter-spacing: -1px;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
 				background: rgb(0,0,0); /* fallback color */
-				background rgba(0,0,0,0.7);
+				background: rgba(0,0,0,0.5);
 				padding: 10px;
 			}
 
-			h08 {
+			h10308 {
 				position: absolute;
-				top: 0px;
+				top: 433px;
 				left: 1280px;
 				width: 100%;
 			}
 
 
-			h08 span {
+			h10308 span {
 				color: white;
-				font: bold 24 px/45px Helvetica, Sans-Serif;
-				letter-spacing: -1px;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
 				background: rgb(0,0,0); /* fallback color */
-				background rgba(0,0,0,0.7);
+				background: rgba(0,0,0,0.5);
 				padding: 10px;
 			}
 
-			h09 {
+			h10309 {
 				position: absolute;
-				bottom: 0px;
+				bottom: 433px;
 				left: 0;
 				width: 100%;
 			}
 
-			h09 span {
+			h10309 span {
 				color: white;
-				font: bold 24 px/45px Helvetica, Sans-Serif;
-				letter-spacing: -1px;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
 				background: rgb(0,0,0); /* fallback color */
-				background rgba(0,0,0,0.7);
+				background: rgba(0,0,0,0.5);
 				padding: 10px;
 			}
 
-			h10 {
+			h10310 {
 				position: absolute;
-				bottom: 0px;
+				bottom: 433px;
 				left: 640px;
 				width: 100%;
 			}
 
-			h10 span {
+			h10310 span {
 				color: white;
-				font: bold 24 px/45px Helvetica, Sans-Serif;
-				letter-spacing: -1px;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
 				background: rgb(0,0,0); /* fallback color */
-				background rgba(0,0,0,0.7);
+				background: rgba(0,0,0,0.5);
 				padding: 10px;
 			}
 
-			h56 {
+			h10156 {
 				position: absolute;
-				bottom: 0px;
+				bottom: 433px;
 				left: 1280px;
 				width: 100%;
 			}
 
 
-			h56 span {
+			h10156 span {
 				color: white;
-				font: bold 24 px/45px Helvetica, Sans-Serif;
-				letter-spacing: -1px;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
 				background: rgb(0,0,0); /* fallback color */
-				background rgba(0,0,0,0.7);
+				background: rgba(0,0,0,0.5);
 				padding: 10px;
 			}
 		</style>
 
-		<script>
-		function getProgress(i, callback) {
-			var xhr = new XMLHttpRequest();
-			var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
 
-			xhr.responseType = "json";
-
-			xhr.onreadystatechange = function() {
-				if(xhr.readyState === 4) {
-					callback.apply(xhr.response);
-				}
-			}
-
-			xhr.open("GET", "http://series1-" + i + ".local:5000/api/job");
-			xhr.setRequestHeader("X-Api-Key", apiKey);
-			xhr.send();
-		}
-		
-		function startCheck() {
-			getProgress(10306, function() {
-				var prog = this.progress.completion;
-				if(prog == null) {
-					prog = 0;
-				}
-				document.getElementById('06').innerHTML = "<h06><span>10306: " + prog.toFixed(2) + "%</span></h06>";
-			});
-
-			getProgress(10307, function() {
-				var prog = this.progress.completion;
-				if(prog == null) {
-					prog = 0;
-				}
-				document.getElementById('07').innerHTML = "<h07><span>" + "10307: " + prog.toFixed(2) + "%" + "</span></h07>";
-			});
-
-			getProgress(10308, function() {
-				var prog = this.progress.completion;
-				if(prog == null) {
-					prog = 0;
-				}
-				document.getElementById('08').innerHTML = "<h08><span>" + "10308: " + prog.toFixed(2) + "%" + "</span><h08>";
-			});
-
-			getProgress(10309, function() {
-				var prog = this.progress.completion;
-				if(prog == null) {
-					prog = 0;
-				}
-				document.getElementById('09').innerHTML = "<h09><span>" + "10309: " + prog.toFixed(2) + "%" + "</span></h09>";
-			});
-
-			getProgress(10310, function() {
-				var prog = this.progress.completion;
-				if(prog == null) {
-					prog = 0;
-				}
-				document.getElementById('10').innerHTML = "<h10><span>" + "10310: " +  prog.toFixed(2) + "%" + "</span></h10>";
-			});
-
-			getProgress(10156, function() {
-				var prog = this.progress.completion;
-				if(prog == null) {
-					prog = 0;
-				}
-				document.getElementById('56').innerHTML = "<h56><span>" + "10156: " + prog.toFixed(2) + "%" + "</span></h56>";
-			});
-
-			var t = setTimeout(startCheck, 1000);
-		}
-		</script>
 	</head>
-	<!-- Taken from http://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock -->
 
 	<body onload="startCheck()">
-		<div id = "06" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"><h06>test</h06></div>
-		<div id = "07" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
-		<div id = "08" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
-		<div id = "09" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
-		<div id = "10" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
-		<div id = "56" style ="color: #ffffff; font-size: 200%; font-family: sans-serif"> </div>
-	</body
+		<div id = "10306"> </div>
+		<div id = "10307"> </div>
+		<div id = "10308"> </div>
+		<div id = "10309"> </div>
+		<div id = "10310"> </div>
+		<div id = "10156"> </div>
+	</body>
+
+	<script>
+	function getProgress(i) {
+		var xhr = new XMLHttpRequest();
+		var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
+		var prog = 0;
+
+		xhr.responseType = "json";
+
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState === 4) {
+				prog = xhr.response.progress.completion != null ? xhr.response.progress.completion : 0;
+				editMSG(i, prog.toFixed(2) + "%");
+			}
+		}
+
+		xhr.open("GET", "http://series1-" + i + ".local:5000/api/job");
+		xhr.setRequestHeader("X-Api-Key", apiKey);
+		xhr.send();
+	}
+
+	function getTime(i) {
+		var xhr = new XMLHttpRequest();
+		var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
+		prog = new Date();
+
+		xhr.responseType = "json";
+
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState === 4) {
+				prog.setSeconds(xhr.response.progress.printTime % 60);
+				prog.setMinutes(Math.floor(xhr.response.progress.printTime / (60)));
+				prog.setHours(Math.floor(xhr.response.progress.printTime / (60 * 60)));
+				editMSG(i, prog.getHours() + ":" + prog.getMinutes() + ":" + prog.getSeconds());
+			}
+		}
+
+		xhr.open("GET", "http://series1-" + i + ".local:5000/api/job");
+		xhr.setRequestHeader("X-Api-Key", apiKey);
+		xhr.send();
+	}
+
+	function editMSG(sn) {
+		var xhr = new XMLHttpRequest();
+		var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
+		timeForm = new Date();
+		var prog = 0;
+		var time = 0;
+		var timeRem = 0;
+		var content = "";
+
+		xhr.responseType = "json";
+
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState === 4) {
+				prog = xhr.response.progress.completion == null ? 0 : xhr.response.progress.completion;
+				time = xhr.response.progress.printTime == null ? 0 : xhr.response.progress.completion;
+
+				timeRem = xhr.response.progress.printTimeLeft;// == null ? (100-prog) / 100 * time : xhr.response.progress.printTimeLeft;
+
+				console.log(sn + " " + timeRem);
+
+				if(timeRem != null) {
+					timeForm.setSeconds(timeRem % 60);
+					timeForm.setMinutes(Math.floor(timeRem / (60)));
+					timeForm.setHours(Math.floor((timeRem / (60 * 60))));
+					content = timeForm.getHours() + "h " + timeForm.getMinutes() + "m " + timeForm.getSeconds() + "s";
+				} else {
+					content = "done";
+				}
+				document.getElementById(sn).innerHTML = "<h" + sn + "><span> "  + content + "</span></h" + sn + ">";
+			}
+		}
+
+		xhr.open("GET", "http://series1-" + sn + ".local:5000/api/job");
+		xhr.setRequestHeader("X-Api-Key", apiKey);
+		xhr.send();
+	}
+
+	function startCheck() {
+
+		editMSG(10306);
+		editMSG(10307);
+		editMSG(10308);
+		editMSG(10309);
+		editMSG(10310);
+		editMSG(10156);
+
+		var t = setTimeout(startCheck, 1000);
+	}
+
+	</script>
 </html>
