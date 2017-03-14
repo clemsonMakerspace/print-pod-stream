@@ -99,6 +99,57 @@
 				background: rgba(0,0,0,0.5);
 				padding: 10px;
 			}
+
+			hLulzbot {
+				position: absolute;
+				top: 508px;
+				left: 0px;
+				width: 100%;
+			}
+
+			hLulzbot span {
+				color: black;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
+				background: rgb(0,0,0); /* fallback color */
+				background: rgba(0,0,0,0);
+				padding: 10px;
+			}
+
+			hFarHornet {
+				position: absolute;
+				top: 470px;
+				right: 0px;
+				width: 100%;
+				text-align: right;
+			}
+
+			hFarHornet span {
+				color: black;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
+				background: rgb(0,0,0); /* fallback color */
+				background: rgba(0,0,0,0);
+				padding: 10px;
+			}
+
+			hWarmMink {
+				position: absolute;
+				bottom: 470px;
+				right: 0px;
+				width: 100%;
+				text-align: right;
+			}
+
+			hWarmMink span {
+				color: black;
+				font: 24px/45px Helvetica, Sans-Serif;
+				letter-spacing: 0px;
+				background: rgb(0,0,0); /* fallback color */
+				background: rgba(0,0,0,0);
+				padding: 10px;
+			}
+
 		</style>
 
 
@@ -111,52 +162,16 @@
 		<div id = "10309"> </div>
 		<div id = "10310"> </div>
 		<div id = "10156"> </div>
+		<div id = "Lulzbot"> </div>
+		<div id = "FarHornet"> </div>
+		<div id = "WarmMink"> </div>
 	</body>
 
 	<script>
-	function getProgress(i) {
-		var xhr = new XMLHttpRequest();
-		var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
-		var prog = 0;
-
-		xhr.responseType = "json";
-
-		xhr.onreadystatechange = function() {
-			if(xhr.readyState === 4) {
-				prog = xhr.response.progress.completion != null ? xhr.response.progress.completion : 0;
-				editMSG(i, prog.toFixed(2) + "%");
-			}
-		}
-
-		xhr.open("GET", "http://series1-" + i + ".local:5000/api/job");
-		xhr.setRequestHeader("X-Api-Key", apiKey);
-		xhr.send();
-	}
-
-	function getTime(i) {
-		var xhr = new XMLHttpRequest();
-		var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
-		prog = new Date();
-
-		xhr.responseType = "json";
-
-		xhr.onreadystatechange = function() {
-			if(xhr.readyState === 4) {
-				prog.setSeconds(xhr.response.progress.printTime % 60);
-				prog.setMinutes(Math.floor(xhr.response.progress.printTime / (60)));
-				prog.setHours(Math.floor(xhr.response.progress.printTime / (60 * 60)));
-				editMSG(i, prog.getHours() + ":" + prog.getMinutes() + ":" + prog.getSeconds());
-			}
-		}
-
-		xhr.open("GET", "http://series1-" + i + ".local:5000/api/job");
-		xhr.setRequestHeader("X-Api-Key", apiKey);
-		xhr.send();
-	}
 
 	function editMSG(sn) {
 		var xhr = new XMLHttpRequest();
-		var apiKey = "7AA24AC7430A43ABAEA065C83458270C";
+		var apiKey = "****";
 		timeForm = new Date();
 		var prog = 0;
 		var time = 0;
@@ -168,19 +183,27 @@
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState === 4) {
 				prog = xhr.response.progress.completion == null ? 0 : xhr.response.progress.completion;
-				time = xhr.response.progress.printTime == null ? 0 : xhr.response.progress.completion;
+				time = xhr.response.progress.printTime == null ? 0 : xhr.response.progress.printTime;
 
-				timeRem = xhr.response.progress.printTimeLeft;// == null ? (100-prog) / 100 * time : xhr.response.progress.printTimeLeft;
+				timeRem = (xhr.response.progress.printTimeLeft == null ? (time / (1 - prog)) - time : xhr.response.progress.printTimeLeft);
 
-				console.log(sn + " " + timeRem);
+				// console.log(sn + "prog " + prog + "time " + time + "cal timeRem " + (time / (1 - prog)) - time + "octo timeRem " + xhr.response.progress.printTimeLeft);
 
-				if(timeRem != null) {
+				if(xhr.response.progress.printTimeLeft != null) {
 					timeForm.setSeconds(timeRem % 60);
 					timeForm.setMinutes(Math.floor(timeRem / (60)));
 					timeForm.setHours(Math.floor((timeRem / (60 * 60))));
 					content = timeForm.getHours() + "h " + timeForm.getMinutes() + "m " + timeForm.getSeconds() + "s";
 				} else {
-					content = "done";
+					if(prog != 0 && prog != 100 && prog != null) {
+						timeForm.setSeconds(timeRem % 60);
+						timeForm.setMinutes(Math.floor(timeRem / (60)));
+						timeForm.setHours(Math.floor((timeRem / (60 * 60))));
+
+						content = "Tedder's Guesstimate " + timeForm.getHours() + "h " + timeForm.getMinutes() + "m " + timeForm.getSeconds() + "s";
+					} else {
+						content = "done";
+					}
 				}
 				document.getElementById(sn).innerHTML = "<h" + sn + "><span> "  + content + "</span></h" + sn + ">";
 			}
@@ -191,6 +214,87 @@
 		xhr.send();
 	}
 
+	function editLULZ() {
+		var xhr = new XMLHttpRequest();
+		var apiKey = "****";
+		timeForm = new Date();
+		var prog = 0;
+		var time = 0;
+		var timeRem = 0;
+		var content = "";
+
+		xhr.responseType = "json";
+
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState === 4) {
+				prog = xhr.response.progress.completion == null ? 0 : xhr.response.progress.completion;
+				time = xhr.response.progress.printTime == null ? 0 : xhr.response.progress.printTime;
+
+				timeRem = (xhr.response.progress.printTimeLeft == null ? (time / (1 - prog)) - time : xhr.response.progress.printTimeLeft);
+
+				// console.log("Lulz " + "prog " + prog + "time " + time + "cal timeRem " + (time / (1 - prog)) - time + "octo timeRem " + xhr.response.progress.printTimeLeft);
+
+				if(xhr.response.progress.printTimeLeft != null && xhr.response.progress.printTimeLeft != 0) {
+					timeForm.setSeconds(timeRem % 60);
+					timeForm.setMinutes(Math.floor(timeRem / (60)));
+					timeForm.setHours(Math.floor((timeRem / (60 * 60))));
+					content = timeForm.getHours() + "h " + timeForm.getMinutes() + "m " + timeForm.getSeconds() + "s";
+				} else {
+					if(prog != 0 && prog != 100 && prog != null) {
+						timeForm.setSeconds(timeRem % 60);
+						timeForm.setMinutes(Math.floor(timeRem / (60)));
+						timeForm.setHours(Math.floor((timeRem / (60 * 60))));
+
+						content = "Tedder's Guesstimate " + timeForm.getHours() + "h " + timeForm.getMinutes() + "m " + timeForm.getSeconds() + "s";
+					} else {
+						content = "done";
+					}
+				}
+				document.getElementById("Lulzbot").innerHTML = "<hLulzbot><span>  Lulzbot: "  + content + "</span></hLulzbot>";
+			}
+		}
+
+		xhr.open("GET", "http://octopi.local/api/job");
+		xhr.setRequestHeader("X-Api-Key", apiKey);
+		xhr.send();
+	}
+
+	function editFORM(sn) {
+		var xhr = new XMLHttpRequest();
+		var apiKey = "****";
+		timeForm = new Date();
+		var prog = 0;
+		var time = 0;
+		var timeRem = 0;
+		var content = "";
+
+		xhr.responseType = "json";
+
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState === 4) {
+				if(xhr.response[0].serial == sn) {
+					if(xhr.response[0].printer_status.current_print_run == null) {
+						content = "Ready to print!";
+					} else {
+						content = "Printing";
+					}
+				} else if (xhr.response[1].serial == sn) {
+					if(xhr.response[1].printer_status.current_print_run == null) {
+						content = "Ready to print!";
+					} else {
+						content = "Printing!";
+					}
+				}
+				document.getElementById(sn).innerHTML = "<h" + sn + "><span> " + sn + ": " + content + "</span></h" + sn + ">";
+		 	}
+		}
+
+		xhr.open("GET", "https://api.formlabs.com/printernet/v1/my/printers/");
+		xhr.setRequestHeader("Authorization", apiKey);
+		xhr.send();
+	}
+
+
 	function startCheck() {
 
 		editMSG(10306);
@@ -199,6 +303,9 @@
 		editMSG(10309);
 		editMSG(10310);
 		editMSG(10156);
+		editLULZ();
+		editFORM("FarHornet");
+		editFORM("WarmMink");
 
 		var t = setTimeout(startCheck, 1000);
 	}
